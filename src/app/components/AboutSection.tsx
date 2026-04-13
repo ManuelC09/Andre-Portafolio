@@ -1,12 +1,13 @@
 "use client";
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion'; // <-- Importamos Variants
 import { ArrowRight } from 'lucide-react';
 
 export default function AboutSection() {
   
-  const containerVariants = {
+  // Tipamos explícitamente con : Variants
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -14,17 +15,23 @@ export default function AboutSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
-      opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+      opacity: 1, 
+      y: 0, 
+      // ease como string simple, SIN corchetes
+      transition: { duration: 0.8, ease: "easeOut" } 
     },
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: { 
-      opacity: 1, scale: 1, transition: { duration: 1, ease: "easeOut", delay: 0.4 } 
+      opacity: 1, 
+      scale: 1, 
+      // ease como string simple, SIN corchetes
+      transition: { duration: 1, ease: "easeOut", delay: 0.4 } 
     },
   };
 

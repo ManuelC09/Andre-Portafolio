@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion'; // <-- Importamos Variants
 import { ArrowUpRight, PlayCircle } from 'lucide-react';
 
 // Datos de los proyectos con spans actualizados para llenar la pantalla
@@ -47,8 +47,8 @@ const projects = [
 
 export default function ProjectsSection() {
   
-  // Variantes para la entrada staggered
-  const containerVariants = {
+  // Tipamos explícitamente con : Variants
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -56,12 +56,13 @@ export default function ProjectsSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+      // Corregido: ease como string simple
+      transition: { duration: 0.8, ease: "easeOut" } 
     },
   };
 
@@ -147,7 +148,7 @@ export default function ProjectsSection() {
                     <motion.div 
                       className="px-4 py-1.5 backdrop-blur-md bg-white/10 border border-white/20 rounded-full text-xs font-semibold text-white tracking-wide uppercase"
                       initial={{ y: 0, opacity: 1 }}
-                      whileHover={{ y: -10, opacity: 0.8 }} // Pequeño efecto local si se hace hover directo
+                      whileHover={{ y: -10, opacity: 0.8 }} 
                     >
                       {project.category}
                     </motion.div>

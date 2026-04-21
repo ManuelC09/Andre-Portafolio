@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight } from 'lucide-react';
-import { FaGithub, FaXTwitter } from 'react-icons/fa6'; 
+import { FaInstagram, FaXTwitter } from 'react-icons/fa6'; 
 
 export default function HeroSection() {
   // Configuración de animación de entrada suave
@@ -69,7 +69,7 @@ export default function HeroSection() {
             <div className="flex items-center gap-4 justify-center sm:justify-start">
               {[
                 { icon: FaXTwitter, href: "#" },
-                { icon: FaGithub, href: "#" },
+                { icon: FaInstagram, href: "#" },
                 { icon: Mail, href: "#" },
               ].map((social, index) => (
                 <a 
@@ -86,16 +86,16 @@ export default function HeroSection() {
 
         {/* COLUMNA DERECHA: Imagen */}
         <motion.div 
-          className="flex justify-center lg:justify-end relative"
+          className="flex justify-center items-center relative w-full h-full"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <div className="absolute inset-0 bg-accent/20 blur-[120px] rounded-full scale-75" />
           
-          <div className="relative w-[320px] h-[400px] sm:w-[400px] sm:h-[500px] md:w-[450px] md:h-[560px]">
+          <div className="relative w-[340px] h-[420px] sm:w-[400px] sm:h-[500px] md:w-[480px] md:h-[600px]">
             <Image
-              src="/profile.png" 
+              src="/profile-v2.png" // <-- Recuerda usar el nuevo nombre aquí si cambiaste el archivo para la caché
               alt="Retrato de André"
               fill
               priority 

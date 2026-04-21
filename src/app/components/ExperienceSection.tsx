@@ -1,39 +1,40 @@
 "use client";
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 
-// Datos actualizados con arreglos de logos por experiencia
+// Datos actualizados con la información real de André
 const experiences = [
   {
     id: 1,
-    role: "Project Manager & Lead Community Manager",
-    company: "am:pm | Primitivo",
-    period: "2024 - 2025",
-    yearWatermark: "2025", // El año que irá gigante en el fondo
-    description: "Liderazgo de equipos creativos y gestión integral de proyectos digitales. Planificación de calendarios de contenido, análisis de métricas de rendimiento (ROI) y coordinación en la ejecución de campañas de alto impacto a nivel nacional.",
-    skills: ["Project Management", "Estrategia Digital", "Liderazgo de Equipos"],
-    logos: ['/logos/ampm.png', '/logos/Primitivo.png']
+    role: "Community Manager & Project Manager",
+    company: "AM:PM | Primitivo | The Reef | Vinagre Rico",
+    period: "2025",
+    yearWatermark: "2025",
+    description: "Responsable de la planificación y ejecución de contenido digital, desarrollando calendarios, copys, coberturas de eventos y bitácoras. Además, asumí el rol de Project Manager, coordinando tareas y asegurando el cumplimiento de tiempos en campañas.",
+    skills: ["Project Management", "Estrategia de Contenido", "Cobertura de Eventos"],
+    // Asegúrate de tener estas imágenes en tu carpeta public/logos
+    logos: ['/logos/ampm.png', '/logos/Primitivo.png', '/logos/reef.jpg'] 
   },
   {
     id: 2,
-    role: "Social Media & Community Manager",
-    company: "Krispy | Reef | Miztu",
-    period: "2024 - 2025",
-    yearWatermark: "2024",
-    description: "Desarrollo y gestión de comunidades online. Diseño de contenido atractivo, moderación de canales digitales y ejecución de campañas de lanzamiento de productos, incrementando el engagement y la fidelización de la audiencia.",
-    skills: ["Creación de Contenido", "Community Building", "Analytics"],
-    logos: ['/logos/krispy.png', '/logos/reef.jpg', '/logos/Miztura.png']
+    role: "Community Manager",
+    company: "Krispy Chicken | Forno Fiery | Miztura",
+    period: "2025",
+    yearWatermark: "2025",
+    description: "Gestión de redes sociales y ejecución de estrategias de contenido. Desarrollo de calendarios, redacción de copys y coordinación directa con el equipo de diseño. Gestión de la interacción con la comunidad para fortalecer la presencia digital.",
+    skills: ["Gestión de Redes", "Creación de Copys", "Interacción con Comunidad"],
+    logos: ['/logos/krispy.png', '/logos/Miztura.png'] 
   },
   {
     id: 3,
-    role: "Creador de Contenido Digital",
-    company: "Alex Unique Shop",
-    period: "2020 - 2026",
-    yearWatermark: "2020",
-    description: "Desarrollo de la identidad visual y estrategias de posicionamiento de marca en redes sociales. Atención al cliente, gestión de crisis y construcción de relaciones sólidas con la comunidad local.",
-    skills: ["Identidad Visual", "Atención al Cliente", "Social Media"],
+    role: "Fundador & Gestor de Marca",
+    company: "Alex Unique",
+    period: "2021 - Actualidad",
+    yearWatermark: "2021",
+    description: "Fundador de emprendimiento de ropa deportiva. A cargo de la gestión integral: creación de contenido, estrategia digital, manejo de redes sociales, atención a clientes y desarrollo de identidad de marca para conectar con la audiencia y generar ventas.",
+    skills: ["Estrategia Digital", "Creación de Contenido", "Atención al Cliente"],
     logos: ['/logos/AlexUnique.png']
   }
 ];
@@ -95,11 +96,11 @@ export default function ExperienceSection() {
                   <div className="absolute inset-1 bg-white rounded-full" />
                 </motion.div>
 
-                {/* ESPACIO OPUESTO: MARCA DE AGUA DEL AÑO (Llena el espacio en blanco) */}
+                {/* ESPACIO OPUESTO: MARCA DE AGUA DEL AÑO */}
                 <div className={`hidden md:flex md:w-[45%] ${isEven ? 'justify-start pl-16' : 'justify-end pr-16'}`}>
                   <motion.span 
                     initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 0.05, scale: 1 }} // Opacidad muy baja (5%) para ser un fondo sutil
+                    whileInView={{ opacity: 0.05, scale: 1 }} 
                     viewport={{ once: true }}
                     transition={{ duration: 1 }}
                     className="text-8xl lg:text-[10rem] font-black text-white pointer-events-none select-none tracking-tighter"
@@ -126,13 +127,13 @@ export default function ExperienceSection() {
                         {exp.role}
                       </h3>
                       
-                      <div className="flex flex-col xl:flex-row xl:items-center gap-3 xl:gap-6 text-sm text-gray-400 mb-6 font-medium">
+                      <div className="flex flex-col xl:flex-row xl:items-start gap-3 xl:gap-6 text-sm text-gray-400 mb-6 font-medium">
                         
                         {/* BADGE CON LOGOS DE EMPRESAS */}
-                        <span className="flex items-center gap-3 text-accent bg-accent/10 px-4 py-2 rounded-full border border-accent/20">
+                        <span className="flex items-center gap-3 text-accent bg-accent/10 px-4 py-2 rounded-xl border border-accent/20">
                           <div className="flex items-center -space-x-2">
                             {exp.logos.map((logo, i) => (
-                              <div key={i} className="relative w-7 h-7 rounded-full overflow-hidden border-2 border-[#0a1128] bg-white shadow-sm">
+                              <div key={i} className="relative w-7 h-7 rounded-full overflow-hidden border-2 border-[#0a1128] bg-white shadow-sm flex-shrink-0">
                                 <Image 
                                   src={logo} 
                                   alt="Logo empresa" 
@@ -142,12 +143,12 @@ export default function ExperienceSection() {
                               </div>
                             ))}
                           </div>
-                          <span className="ml-1 tracking-wide">{exp.company}</span>
+                          <span className="ml-1 tracking-wide leading-tight">{exp.company}</span>
                         </span>
 
-                        <span className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" />
-                          {exp.period}
+                        <span className="flex items-center gap-2 mt-2 xl:mt-0 xl:py-2">
+                          <Calendar className="w-4 h-4 flex-shrink-0" />
+                          <span className="whitespace-nowrap">{exp.period}</span>
                         </span>
                       </div>
 

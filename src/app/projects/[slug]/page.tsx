@@ -1,100 +1,186 @@
-import Link from 'next/link';
-import { ArrowLeft, PlayCircle } from 'lucide-react'; // <-- Aquí agregamos PlayCircle
+"use client";
 
-// Simulamos una base de datos. Aquí puedes detallar lo de cada marca.
+import { use } from 'react';
+import Link from 'next/link';
+import { ArrowLeft, Play } from 'lucide-react'; 
+import { FaInstagram, FaTiktok, FaFacebookF } from 'react-icons/fa6';
+import { motion, Variants } from 'framer-motion'; // <-- Importamos Variants aquí
+
+// Base de datos actualizada con todas las marcas y arrays para las URLs de los videos
 const projectData = {
   "primitivo": {
     name: "Primitivo",
-    role: "Gestión de Contenido & Cobertura",
-    description: "Para Primitivo, desarrollé una estrategia visual enfocada en resaltar la exclusividad y el ambiente del lugar. Coordiné la grabación de reels dinámicos que muestran la experiencia gastronómica y la coctelería, logrando aumentar el alcance orgánico en un 40% durante el primer mes de campaña.",
-    videos: ["video1.mp4", "video2.mp4"] 
-  },
-  "krispy": {
-    name: "Krispy",
-    role: "Content Creation (Reels)",
-    description: "Lideré la producción de contenido viral (estilo POV) para TikTok e Instagram Reels. El objetivo fue mostrar el producto (pollo frito) de una manera antojable y cercana al público nicaragüense, generando una alta tasa de engagement e interacción directa con la comunidad.",
-    videos: ["video3.mp4", "video4.mp4"]
+    role: "Community & Project Manager",
+    description: "Trabajé como Community Manager, desarrollando contenido, bitácoras, coordinación con diseño, participación en producciones fotográficas y coberturas de eventos, además de brindar apoyo temporal como Project Manager.",
+    platforms: "Instagram, TikTok",
+    videos: [
+      "https://res.cloudinary.com/demo/video/upload/v1690000000/ejemplo1.mp4", 
+      "https://res.cloudinary.com/demo/video/upload/v1690000000/ejemplo2.mp4"
+    ] 
   },
   "reef": {
     name: "The Reef",
-    role: "Cobertura de Eventos",
-    description: "Cobertura dinámica de eventos y creación de contenido en tiempo real para mantener a la audiencia cautiva y aumentar la asistencia a futuras ediciones.",
-    videos: ["video5.mp4"]
+    role: "Community Manager",
+    description: "Encargado de la planificación de contenido, coordinación con diseño, coberturas de eventos y comunicación directa con la gerente de marketing para alinear estrategias y objetivos.",
+    platforms: "Instagram, TikTok",
+    videos: ["link-video-aqui.mp4", "link-video-aqui.mp4"]
   },
   "ampm": {
-    name: "am:pm",
-    role: "Campaña Digital",
-    description: "Diseño y ejecución de campaña digital para promocionar nuevas aperturas y productos clave, impulsando el tráfico a las sucursales.",
-    videos: ["video6.mp4"]
+    name: "AM:PM",
+    role: "Community Manager",
+    description: "Gestioné la comunicación digital de la marca ejecutando estrategias de contenido enfocadas en fortalecer su presencia en redes. Realicé coberturas de eventos y activaciones generando contenido en tiempo real. También coordiné con embajadores de la marca y el equipo creativo para asegurar la consistencia en la comunicación y ejecución efectiva de campañas.",
+    platforms: "Instagram, TikTok, Facebook",
+    videos: ["link-video-aqui.mp4", "link-video-aqui.mp4", "link-video-aqui.mp4"]
+  },
+  "krispy": {
+    name: "Krispy Chicken",
+    role: "Community Manager",
+    description: "Gestionando la planificación y ejecución de contenido en redes sociales. Trabajé en la creación de copys y en coordinación directa con el diseñador para desarrollar piezas visuales alineadas a la identidad de la marca, asegurando consistencia en la comunicación digital.",
+    platforms: "Instagram, TikTok",
+    videos: ["link-video-aqui.mp4", "link-video-aqui.mp4"]
+  },
+  "forno": {
+    name: "Forno Fiery",
+    role: "Community Manager",
+    description: "Estuve a cargo de la gestión de redes sociales, desarrollando contenido enfocado en resaltar la propuesta de la marca. Colaboré estrechamente con el equipo de diseño en la producción de contenido visual, manteniendo una línea gráfica coherente y atractiva.",
+    platforms: "Instagram",
+    videos: ["link-video-aqui.mp4"]
+  },
+  "miztura": {
+    name: "Miztura",
+    role: "Community Manager",
+    description: "Desempeñé el rol encargándome de la planificación de contenido, redacción de copys y coordinación con el diseñador para la creación de piezas. Mi enfoque fue mantener una comunicación clara y alineada con el estilo de la marca.",
+    platforms: "Instagram, TikTok",
+    videos: ["link-video-aqui.mp4", "link-video-aqui.mp4"]
+  },
+  "vinagre": {
+    name: "Vinagre Rico",
+    role: "Community Manager",
+    description: "Responsable de la gestión de redes sociales, trabajando en la organización de contenido y desarrollo de copys. Además, colaboré con el diseñador en la creación de materiales visuales, asegurando una comunicación consistente y acorde a la identidad de la marca.",
+    platforms: "Instagram, Facebook",
+    videos: ["link-video-aqui.mp4"]
   }
 };
 
-// En Next.js 15+, params es una promesa, por lo que la función debe ser asíncrona
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   
-  // Esperamos los parámetros de la URL de forma segura
-  const { slug } = await params;
+  const { slug } = use(params);
   const project = projectData[slug as keyof typeof projectData];
 
-  // Si alguien pone una URL incorrecta
   if (!project) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Proyecto no encontrado</div>;
+    return <div className="min-h-screen flex items-center justify-center text-white bg-[#020610]">Proyecto no encontrado</div>;
   }
 
-  return (
-    <main className="min-h-screen bg-background pt-24 pb-20 px-6 md:px-10">
-      <div className="max-w-5xl mx-auto">
-        
-        {/* Botón de regreso */}
-        <Link 
-          href="/#projects" 
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-accent transition-colors mb-12 group"
-        >
-          <div className="p-2 rounded-full border border-gray-800 group-hover:border-accent group-hover:bg-accent/10 transition-all">
-            <ArrowLeft className="w-4 h-4" />
-          </div>
-          Volver al Portafolio
-        </Link>
+  // Tipamos explícitamente con : Variants para que TypeScript no se queje
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
 
-        {/* Cabecera del Proyecto */}
-        <div className="mb-16">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+  return (
+    <main className="min-h-screen bg-[#020610] pt-24 pb-20 px-6 md:px-10 overflow-hidden relative">
+      
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/10 blur-[150px] rounded-full z-0 pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        
+        <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+          <Link 
+            href="/#projects" 
+            className="inline-flex items-center gap-3 text-gray-400 hover:text-white transition-colors mb-12 group"
+          >
+            <div className="p-2.5 rounded-full bg-gray-900/50 border border-gray-800 group-hover:border-primary group-hover:bg-primary/20 transition-all duration-300">
+              <ArrowLeft className="w-4 h-4" />
+            </div>
+            <span className="font-medium tracking-wide">Volver al Portafolio</span>
+          </Link>
+        </motion.div>
+
+        <motion.div 
+          initial="hidden" animate="visible" variants={{
+            hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } }
+          }}
+          className="mb-20"
+        >
+          <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             {project.name}
-          </h1>
-          <div className="w-full h-[1px] bg-gradient-to-r from-gray-800 to-transparent mb-8" />
+          </motion.h1>
+          <motion.div variants={fadeUp} className="w-full h-[1px] bg-gradient-to-r from-primary/50 via-gray-800 to-transparent mb-10" />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="md:col-span-2">
-              <h3 className="text-xl text-white font-semibold mb-4">El Reto / Lo que hice</h3>
-              <p className="text-gray-300 leading-relaxed text-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <motion.div variants={fadeUp} className="md:col-span-2">
+              <h3 className="text-xl text-white font-semibold mb-4 flex items-center gap-2">
+                <span className="w-8 h-1 bg-primary rounded-full"></span>
+                El Reto / Lo que hice
+              </h3>
+              <p className="text-gray-300 leading-relaxed text-lg font-light">
                 {project.description}
               </p>
-            </div>
-            <div className="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
-              <h4 className="text-gray-500 text-sm uppercase tracking-wider mb-2">Rol</h4>
-              <p className="text-accent font-medium mb-6">{project.role}</p>
+            </motion.div>
+            
+            <motion.div variants={fadeUp} className="bg-[#0a1128]/50 backdrop-blur-md p-8 rounded-3xl border border-gray-800/80 shadow-2xl">
+              <h4 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Rol Asignado</h4>
+              <p className="text-accent font-semibold mb-8 text-lg">{project.role}</p>
               
-              <h4 className="text-gray-500 text-sm uppercase tracking-wider mb-2">Plataformas</h4>
-              <p className="text-white font-medium">Instagram, TikTok</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Galería de Multimedia */}
-        <div>
-          <h3 className="text-2xl font-bold text-white mb-8">Contenido Destacado</h3>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="relative w-full aspect-[9/16] bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 shadow-xl group">
-                <div className="absolute inset-0 flex items-center justify-center flex-col gap-3">
-                  <PlayCircle className="w-12 h-12 text-gray-700 group-hover:text-accent transition-colors" />
-                  <span className="text-gray-600 text-sm">Espacio para Video {item}</span>
+              <h4 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Plataformas</h4>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 text-white font-medium">
+                {/* Íconos dinámicos: Solo aparecen si la plataforma está en el texto */}
+                <div className="flex items-center gap-2.5 bg-gray-900/50 px-3 py-1.5 rounded-lg border border-gray-800 w-fit">
+                  {project.platforms.includes('Instagram') && <FaInstagram className="w-5 h-5 text-pink-500 drop-shadow-md" />}
+                  {project.platforms.includes('TikTok') && <FaTiktok className="w-4 h-4 text-white drop-shadow-md" />}
+                  {project.platforms.includes('Facebook') && <FaFacebookF className="w-4 h-4 text-blue-500 drop-shadow-md" />}
                 </div>
+                
+                {/* Texto de las plataformas */}
+                <span className="text-gray-300 text-sm">{project.platforms}</span>
               </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          <h3 className="text-2xl font-bold text-white mb-10 flex items-center gap-3">
+            Contenido Destacado <Play className="w-5 h-5 text-primary fill-primary" />
+          </h3>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {project.videos.map((videoUrl, index) => (
+              <motion.div 
+                key={index} 
+                variants={fadeUp}
+                className="relative w-full aspect-[9/16] bg-gray-900/50 rounded-[2rem] overflow-hidden border border-gray-800 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group hover:border-primary/50 hover:shadow-[0_0_40px_rgba(29,78,216,0.2)] transition-all duration-500"
+              >
+                {videoUrl.startsWith('http') ? (
+                  <video 
+                    src={videoUrl}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a1128] gap-4 p-6 text-center">
+                    <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center animate-pulse">
+                      <Play className="w-6 h-6 text-gray-500 ml-1" />
+                    </div>
+                    <p className="text-gray-500 text-sm font-medium">Falta subir video {index + 1} a Cloudinary</p>
+                  </div>
+                )}
+
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#020610] to-transparent pointer-events-none" />
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </main>

@@ -27,23 +27,23 @@ const projectData = {
     ],
   },
   alexUnique: {
-  name: "Alex Unique",
-  role: "Fundador & Gestor de Marca",
-  description:
-    "Fundador de emprendimiento de ropa deportiva. A cargo de la gestión integral: creación de contenido, estrategia digital, manejo de redes sociales, atención a clientes y desarrollo de identidad de marca para conectar con la audiencia y generar ventas.",
-  platforms: "Instagram, TikTok",
-  videos: [
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099601/Joggers_que_combinan_con_todoBuzos_que_no_pasan_desapercibidosY_s%C3%AD_solo_en_Alex_Unique_AlexU_c3myau.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099603/Nueva_colecci%C3%B3n_Env%C3%ADos_por_medio_de_Cargotrans_7-00_P.M_%EF%B8%8F_l8nvow.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099605/Si_te_tom%C3%A1s_el_gym_en_serio_tu_outfit_tambi%C3%A9n_deber%C3%ADa_estar_a_la_altura.Nueva_colecci%C3%B3n_disponib_gaaxph.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099606/Nuevos_shorts_en_Alex_Unique_Comodidad_y_estilo_para_entrenar_o_andar_casual_en_cualquier_cn1n7k.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099607/%C3%9Altima_colecci%C3%B3n_del_a%C3%B1o_Env%C3%ADos_a_toda_Nicaragua_vppxeb.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099608/Comodidad_y_estilo_en_un_solo_fit.Nuestros_Joggers_Alex_Unique_son_perfectos_para_entrenar_s_qh3doc.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099608/Los_mejores_joggers_y_shorts_para_gym_y_ocasiones_casuales_est%C3%A1n_en_Alex_Unique._%EF%B8%8F__%EF%B8%8F_Compr_scifph.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099612/Unboxing_de_la_mercader%C3%ADa_de_esta_semana_unboxing_ropa_ropadeportiva_gym_nicaragua_nnpjzc.mp4",
-    "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099615/Si_solo_mostr%C3%A1s_las_prendas_que_compraste_legalmente_para_reventa_sin_afirmar_que_trabaj%C3%A1s_con_vuwufw.mp4"
-  ]
-},
+    name: "Alex Unique",
+    role: "Fundador & Gestor de Marca",
+    description:
+      "Fundador de emprendimiento de ropa deportiva. A cargo de la gestión integral: creación de contenido, estrategia digital, manejo de redes sociales, atención a clientes y desarrollo de identidad de marca para conectar con la audiencia y generar ventas.",
+    platforms: "Instagram, TikTok",
+    videos: [
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099601/Joggers_que_combinan_con_todoBuzos_que_no_pasan_desapercibidosY_s%C3%AD_solo_en_Alex_Unique_AlexU_c3myau.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099603/Nueva_colecci%C3%B3n_Env%C3%ADos_por_medio_de_Cargotrans_7-00_P.M_%EF%B8%8F_l8nvow.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099605/Si_te_tom%C3%A1s_el_gym_en_serio_tu_outfit_tambi%C3%A9n_deber%C3%ADa_estar_a_la_altura.Nueva_colecci%C3%B3n_disponib_gaaxph.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099606/Nuevos_shorts_en_Alex_Unique_Comodidad_y_estilo_para_entrenar_o_andar_casual_en_cualquier_cn1n7k.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099607/%C3%9Altima_colecci%C3%B3n_del_a%C3%B1o_Env%C3%ADos_a_toda_Nicaragua_vppxeb.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099608/Comodidad_y_estilo_en_un_solo_fit.Nuestros_Joggers_Alex_Unique_son_perfectos_para_entrenar_s_qh3doc.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099608/Los_mejores_joggers_y_shorts_para_gym_y_ocasiones_casuales_est%C3%A1n_en_Alex_Unique._%EF%B8%8F__%EF%B8%8F_Compr_scifph.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099612/Unboxing_de_la_mercader%C3%ADa_de_esta_semana_unboxing_ropa_ropadeportiva_gym_nicaragua_nnpjzc.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099615/Si_solo_mostr%C3%A1s_las_prendas_que_compraste_legalmente_para_reventa_sin_afirmar_que_trabaj%C3%A1s_con_vuwufw.mp4",
+    ],
+  },
   reef: {
     name: "The Reef",
     role: "Community Manager",
@@ -71,10 +71,9 @@ const projectData = {
     platforms: "Instagram, TikTok, Facebook",
     videos: [
       "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099061/Una_explosi%C3%B3n_morada_te_espera...Fanta_Uva_lleg%C3%B3_en_versi%C3%B3n_lata_y_est%C3%A1_m%C3%A1s_cool_que_nunca._ei3bt8.mp4",
-  "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099061/Hoy_no_es_un_d%C3%ADa_cualquiera_Es_el_D%C3%ADa_del_Hot_Dog_y_en_AMPM_lo_celebramos_con_nuestra_pro_qgpyc6.mp4",
-  "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099067/AQM-nB8schhmY_HUd9NAtNeQGW-1jUmxa6LyamI0ojIVT5PyvFpyTzXvOHA8cimjwKABv5pHv0zLF__ghZoo1gnQVzqsyaSB68aDDI3udEWyPQ_1_axvvul.mp4",
-  "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099069/As%C3%AD_se_vivi%C3%B3_la_gran_entrega_de_premios_y_clausura_de_nuestra_campa%C3%B1a_Navidad_24-7_Volv%C3%A9_a_wcphut.mp4"
-
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099061/Hoy_no_es_un_d%C3%ADa_cualquiera_Es_el_D%C3%ADa_del_Hot_Dog_y_en_AMPM_lo_celebramos_con_nuestra_pro_qgpyc6.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099067/AQM-nB8schhmY_HUd9NAtNeQGW-1jUmxa6LyamI0ojIVT5PyvFpyTzXvOHA8cimjwKABv5pHv0zLF__ghZoo1gnQVzqsyaSB68aDDI3udEWyPQ_1_axvvul.mp4",
+      "https://res.cloudinary.com/dackn5ysr/video/upload/v1777099069/As%C3%AD_se_vivi%C3%B3_la_gran_entrega_de_premios_y_clausura_de_nuestra_campa%C3%B1a_Navidad_24-7_Volv%C3%A9_a_wcphut.mp4",
     ],
   },
   krispy: {

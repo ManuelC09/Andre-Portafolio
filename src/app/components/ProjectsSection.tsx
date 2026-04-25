@@ -57,11 +57,19 @@ const projects = [
   },
   {
     id: 7,
+    company: "Alex Unique",
+    category: "Branding & Gestión de Marca",
+    image: "/projects/alex-thumb.jpg", // <-- Y esta
+    slug: "alexUnique",
+    span: "col-span-1 md:col-span-2 lg:col-span-2 h-[400px] md:h-[450px]" 
+  },
+  {
+    id: 8,
     company: "Vinagre Rico",
     category: "Organización de Contenido",
     image: "/projects/vinagre-thumb.jpg", // <-- Y esta
     slug: "vinagre",
-    span: "col-span-1 md:col-span-2 lg:col-span-2 h-[400px] md:h-[450px]" 
+    span: "col-span-3 md:col-span-4 lg:col-span-4 h-[400px] md:h-[450px]" 
   }
 ];
 

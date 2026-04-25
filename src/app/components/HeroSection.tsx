@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight } from 'lucide-react';
-import { FaInstagram, FaXTwitter } from 'react-icons/fa6'; 
+import { FaInstagram, FaFacebook } from 'react-icons/fa6'; 
 
 export default function HeroSection() {
   // Configuración de animación de entrada suave
@@ -55,22 +55,22 @@ export default function HeroSection() {
 
           {/* SECCIÓN DE LLAMADA A LA ACCIÓN (CTA) */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-6 pt-4 w-full">
-            {/* Botón principal */}
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center gap-3 px-8 py-3.5 bg-primary text-white font-bold rounded-full text-sm uppercase tracking-wider group shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
-            >
-              Contáctame
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
+            <motion.a 
+  href="mailto:alexandrerb2002@gmail.com?subject=Contacto%20desde%20portafolio&body=Hola%20Andr%C3%A9,%20me%20interesa%20trabajar%20contigo."
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="flex items-center justify-center gap-3 px-8 py-3.5 bg-primary text-white font-bold rounded-full text-sm uppercase tracking-wider group shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
+>
+  Contáctame
+  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+</motion.a>
 
             {/* Íconos sociales */}
             <div className="flex items-center gap-4 justify-center sm:justify-start">
               {[
-                { icon: FaXTwitter, href: "#" },
-                { icon: FaInstagram, href: "#" },
-                { icon: Mail, href: "#" },
+                { icon: FaFacebook, href: "https://www.facebook.com/share/14aT12wSAUr/?mibextid=wwXIfr" },
+                { icon: FaInstagram, href: "https://www.instagram.com/andrebustamante707?igsh=cjd5OW5rbnhvcG00&utm_source=qr" },
+                { icon: Mail, href: "mailto:alexandrerb2002@gmail.com?subject=Contacto%20desde%20portafolio&body=Hola%20Andr%C3%A9,%20quiero%20hablar%20contigo%20sobre..." },
               ].map((social, index) => (
                 <a 
                   key={index} 

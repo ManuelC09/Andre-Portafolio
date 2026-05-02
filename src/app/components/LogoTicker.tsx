@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// Lista de logos (duplicada internamente en el JSX para el efecto infinito)
+
 const logos = [
   { src: '/logos/ampm.png', alt: 'am:pm' },
   { src: '/logos/krispy.png', alt: 'Krispy' },
@@ -11,13 +11,15 @@ const logos = [
   { src: '/logos/reef.jpg', alt: 'Reef' },
   { src: '/logos/Miztura.png', alt: 'Miztu' },
   { src: '/logos/Primitivo.png', alt: 'Primitivo' },
+  { src: '/logos/forno.png', alt: 'Forno' },
+  { src: '/logos/rico.png', alt: 'Rico' },
 ];
 
 export default function LogoTicker() {
   return (
     <section className="py-12 bg-[#020610] border-t border-b border-gray-800/50 overflow-hidden relative">
       
-      {/* Sombras a los lados para que los logos desaparezcan suavemente */}
+
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#020610] to-transparent z-10" />
       <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#020610] to-transparent z-10" />
 
@@ -27,11 +29,11 @@ export default function LogoTicker() {
         </p>
       </div>
 
-      {/* Contenedor del Ticker Animado */}
+
       <div className="flex w-[200%] md:w-[150%] lg:w-[100%]">
         <motion.div 
           className="flex flex-none items-center gap-12 md:gap-20 pr-12 md:pr-20"
-          // Animación de 0% a -50% para crear el bucle infinito perfecto
+
           animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
@@ -39,7 +41,7 @@ export default function LogoTicker() {
             repeat: Infinity 
           }}
         >
-          {/* Mapeamos los logos dos veces para que la transición sea continua */}
+
           {[...logos, ...logos].map((logo, index) => (
             <div 
               key={index} 

@@ -10,7 +10,7 @@ const logos = [
   { src: '/logos/AlexUnique.png', alt: 'Alex Unique Shop' },
   { src: '/logos/reef.jpg', alt: 'Reef' },
   { src: '/logos/Miztura.png', alt: 'Miztu' },
-  { src: '/logos/Primitivo.png', alt: 'Primitivo' },
+  { src: '/logos/primitivonew.png', alt: 'Primitivo' },
   { src: '/logos/forno.png', alt: 'Forno' },
   { src: '/logos/rico.png', alt: 'Rico' },
 ];

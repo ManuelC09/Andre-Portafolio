@@ -1,10 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { Mail, MapPin, Send, User, MessageSquare, Phone } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Send,
+  User,
+  MessageSquare,
+  Phone,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { FaInstagram, FaFacebook, FaLinkedinIn } from "react-icons/fa6";
 
 export default function ContactSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState<"success" | "error" | "">("");
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -22,10 +37,57 @@ export default function ContactSection() {
     },
   };
 
-  // Función temporal para evitar que la página se recargue al dar "Enviar"
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("¡Interfaz lista! El backend se conectará más adelante.");
+
+    setIsSubmitting(true);
+    setStatusMessage("");
+    setStatusType("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatusType("error");
+        setStatusMessage(data.error || "Hubo un error enviando el mensaje.");
+        return;
+      }
+
+      setStatusType("success");
+      setStatusMessage(
+        "Mensaje enviado correctamente. André se pondrá en contacto contigo pronto."
+      );
+
+      form.reset();
+    } catch (error) {
+      console.error("Error enviando el formulario:", error);
+
+      setStatusType("error");
+      setStatusMessage(
+        "Hubo un error enviando el mensaje. Inténtalo nuevamente."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -47,6 +109,7 @@ export default function ContactSection() {
           >
             Ponte en Contacto
           </motion.span>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,6 +137,7 @@ export default function ContactSection() {
               <h3 className="text-3xl font-bold text-white mb-4">
                 ¿Tienes un proyecto en mente?
               </h3>
+
               <p className="text-gray-400 leading-relaxed max-w-md text-lg">
                 Ya sea para gestionar tu comunidad, liderar una nueva campaña
                 digital o coordinar tu próximo gran proyecto, estoy listo para
@@ -90,10 +154,12 @@ export default function ContactSection() {
                 <div className="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
                   <Mail className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
                 </div>
+
                 <div>
                   <p className="text-sm text-gray-500 font-medium uppercase tracking-wider mb-1">
                     Email
                   </p>
+
                   <a
                     href="mailto:alexandrerb2002@gmail.com"
                     className="text-white text-lg font-medium hover:text-accent transition-colors"
@@ -108,10 +174,12 @@ export default function ContactSection() {
                 <div className="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
                   <Phone className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
                 </div>
+
                 <div>
                   <p className="text-sm text-gray-500 font-medium uppercase tracking-wider mb-1">
                     Teléfono
                   </p>
+
                   <a
                     href="tel:+50588424701"
                     className="text-white text-lg font-medium hover:text-accent transition-colors"
@@ -126,10 +194,12 @@ export default function ContactSection() {
                 <div className="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
                   <MapPin className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
                 </div>
+
                 <div>
                   <p className="text-sm text-gray-500 font-medium uppercase tracking-wider mb-1">
                     Ubicación
                   </p>
+
                   <p className="text-white text-lg font-medium">
                     Carazo, Nicaragua
                   </p>
@@ -142,24 +212,31 @@ export default function ContactSection() {
               <p className="text-sm text-gray-500 font-medium uppercase tracking-wider mb-4">
                 Sígueme
               </p>
+
               <div className="flex gap-4">
                 {[
                   {
                     icon: FaLinkedinIn,
                     href: "https://www.linkedin.com/in/andré-bustamante",
+                    label: "LinkedIn",
                   },
                   {
                     icon: FaFacebook,
                     href: "https://www.facebook.com/share/14aT12wSAUr/?mibextid=wwXIfr",
+                    label: "Facebook",
                   },
                   {
                     icon: FaInstagram,
                     href: "https://www.instagram.com/andrebustamante707?igsh=cjd5OW5rbnhvcG00&utm_source=qr",
+                    label: "Instagram",
                   },
-                ].map((social, index) => (
+                ].map((social) => (
                   <a
-                    key={index}
+                    key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 shadow-lg"
                   >
                     <social.icon className="w-5 h-5" />
@@ -189,10 +266,13 @@ export default function ContactSection() {
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-500" />
                   </div>
+
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
+                    autoComplete="name"
                     className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300"
                     placeholder="Tu nombre completo"
                   />
@@ -203,10 +283,13 @@ export default function ContactSection() {
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <Mail className="h-5 w-5 text-gray-500" />
                   </div>
+
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
+                    autoComplete="email"
                     className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300"
                     placeholder="tucorreo@ejemplo.com"
                   />
@@ -217,8 +300,10 @@ export default function ContactSection() {
                   <div className="absolute top-4 left-0 pl-4 pointer-events-none">
                     <MessageSquare className="h-5 w-5 text-gray-500" />
                   </div>
+
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={5}
                     className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none"
@@ -228,14 +313,45 @@ export default function ContactSection() {
 
                 {/* Botón Enviar */}
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   type="submit"
-                  className="w-full py-4 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-3 uppercase tracking-wider shadow-[0_0_20px_rgba(29,78,216,0.3)] hover:shadow-[0_0_30px_rgba(29,78,216,0.5)] hover:bg-blue-600 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-3 uppercase tracking-wider shadow-[0_0_20px_rgba(29,78,216,0.3)] hover:shadow-[0_0_30px_rgba(29,78,216,0.5)] hover:bg-blue-600 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Enviar Mensaje
-                  <Send className="w-5 h-5" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      Enviar Mensaje
+                      <Send className="w-5 h-5" />
+                    </>
+                  )}
                 </motion.button>
+
+                {/* Mensaje de éxito o error */}
+                {statusMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex items-start gap-3 rounded-xl border px-4 py-4 text-sm font-medium leading-relaxed ${
+                      statusType === "success"
+                        ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                        : "border-red-400/30 bg-red-500/10 text-red-300"
+                    }`}
+                  >
+                    {statusType === "success" ? (
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+                    ) : (
+                      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                    )}
+
+                    <span>{statusMessage}</span>
+                  </motion.div>
+                )}
               </div>
             </form>
           </motion.div>
